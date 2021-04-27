@@ -1,0 +1,28 @@
+At the moment I do not have time to be fully designing/researching your work, thus the reason we got someone to help. This work is very straight forward, and does not need someone to write a full design.
+
+As mention so many times already I do not believe you can ssh directly from React as the browser will not allow it. And even the examples you have working are using proxy/server, so understanding them will help in designing our solution. I do not think you going to be go to internet and find a solution and copy directly into our code.
+
+I said this in the first email:
+"In the meantime do you want to start a new page for terminal access. This will be mainly ssh, but from react terminal this does not matter, as it will be proxy over https to a node server. 
+It should be easier enough to do file transfer as well. SO could have a menu on top, to do this like file transfer, color, keys and such. We may need to have several terminal pages, depending on target, ie websocket->ssh->modbus-cli"
+
+So all I asking you to do is create a terminal page that can connect to a server which will forward onto another device. It could be for ssh terminal, but could also be modbus-cli, telnet or what ever other cli interface. It will not be only connecting to Cassini devices, and I never said that. How this is going to work exactly I am not sure yet or the form look and feel. Can we do all this on one terminal, do we have multiple terminals, drop down list to change how terminal behaves, or is it easier to not use websockets and do by predefined commands and do posts ? Thus the reason I given you this to work through, not for me to work through it all, and then when done give to you, as the coding is such a minimal part.
+
+As for remote access to Cassini devices, we will never ssh directly to them. That was never asked. What we have running is the devices when requested, will ssh back to a server, and open a tunnel. This tunnel can be defined to terminate on the device or to any device behind. The work you are doing will be used to connect to what ever is behind the tunnel. So again there is no need to worry about how all this works, but worry how we going to present it and functionality.
+
+Seem that you struggling to going on this, may I suggest you doing the following.
+
+Setup a nodejs server with ssh client package installed. Have a ssh server that the nodejs can connect too. If you want to use websockets, then you need to add this package and setup.  That is your test setup.
+
+Later on you could also add modbus-cli/telnet/other cli devices from nodejs/ssh to see how this works with terminal.
+
+In React:
+Probably best to try and use a terminal package (not necessary, as it would not be to hard to write one from scratch, as it is mostly ccs and browser). As you already loaded 'terminal-in-react' and got the demo running, see if can use it with websocket. There is a package called 'react-use-websocket'. Maybe a use this as a plugin to terminal-in-react ? You will need to write the plugin.
+
+So on nodejs just leave it ssh into server, and have the nodejs echo input/output to your terminal through the ws. See how that feel ? Maybe react-xterm would give us more functionality/better look ?
+
+I am more keen on ws, but it does have it down side, like connectivity issues. Maybe a background keepalive could be an option? Other option is doing post commands. This gives the user better response, and limits attack/mistakes for end devices. So again back to 'terminal-in-react' we could have list of commands/responses for known device where this is sent to the nodejs server, then it forwards/translate command to end device. An idea here is that we have an admin page where user load commands for their device ?
+
+Another plus for us to have ws working is we could expand this to provide a websocket to the end device using the browser as a proxy (I am not sure if we can do this in React, but the browser will have security warnings), but we could extend terminal page to provide http access as well.
+
+I am trying to give you a very simple job, that does not require to much React knowledge, but could be something that will be exciting as it could be used in so many ways for users to access remote devices. I was hoping your would find this a challenge but not to difficult and with you experience working on terminal you would know what you like to see.
