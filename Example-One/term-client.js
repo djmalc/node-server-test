@@ -2,9 +2,10 @@
 import { XTerm } from 'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
 import { FitAddon } from 'xterm-addon-fit';
+
 class ClientTerm {
 
-    const xterm = new XTerm();
+    const xTerm = new XTerm();
     const fitAddon = new FitAddon();
     const attachAddon = new AttachAddon();
     xTerm.loadAddon('attach');
