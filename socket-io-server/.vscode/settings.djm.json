@@ -1,0 +1,9 @@
+{
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true, 
+    "jshint.options": {
+        "esversion": 6
+    },
+    "git.ignoreLimitWarning": true
+}
