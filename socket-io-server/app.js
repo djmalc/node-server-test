@@ -1,20 +1,20 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
+const cors = require("cors");
 const port = process.env.PORT || 4001;
 const index = require("../routes/index");
 
 const app = express();
 
-//app.use(index);
-
-app.use('index', createProxyMiddleware({ target: 'http://localhost', changeOrigin: true }));
+app.use(cors({origin:true}));
+app.use(index);
 
 const server = http.createServer(app);
 
-const io = socketIo(server); // < Interesting!
+const io = socketIo(server, {
+  cors: { orgin: "http://localhost:4001", methods: ["GET", "POST"] },
+});
 
 let interval;
 

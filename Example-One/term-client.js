@@ -53,6 +53,4 @@ class ClientTerm {
   }
 }
 
-module.exports = {
-    ClientTerm
-};
+export default ClientTerm;
