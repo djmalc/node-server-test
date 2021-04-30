@@ -1,6 +1,3 @@
-// SocketService.js
-
-// Manage Socket.IO server
 const socketIO = require("socket.io");
 const PTYService = require("./PTYService");
 
@@ -14,10 +11,12 @@ class SocketService {
     if (!server) {
       throw new Error("Server not found...");
     }
+
     const io = socketIO(server, {
-      cors: { origin: "*" },
+      cors: {
+        origin: "*",
+      },
     });
-    //const io = socketIO(server);
     console.log("Created socket server. Waiting for client connection.");
     // "connection" event happens when any client connects to this io instance.
     io.on("connection", (socket) => {
@@ -36,13 +35,8 @@ class SocketService {
       // Attach any event listeners which runs if any event is triggered from socket.io client
       // For now, we are only adding "input" event, where client sends the strings you type on terminal UI.
       this.socket.on("input", (input) => {
-        console.log("Received input" + input);
         //Runs this event function socket receives "input" events from socket.io client
         this.pty.write(input);
-      });
-      this.socket.on("disconnect", (input) => {
-        console.log("received disconnect");
-        this.socket = null;
       });
     });
   }

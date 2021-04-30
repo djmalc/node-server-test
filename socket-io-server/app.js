@@ -7,7 +7,7 @@ const index = require("../routes/index");
 
 const app = express();
 
-app.use(cors({origin:true}));
+app.use(cors({ origin: true }));
 app.use(index);
 
 const server = http.createServer(app);
@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const getApiAndEmit = socket => {
+const getApiAndEmit = (socket) => {
   const response = new Date();
   // Emitting a new message. Will be consumed by the client
   socket.emit("FromAPI", response);
